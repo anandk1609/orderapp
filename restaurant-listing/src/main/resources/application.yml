@@ -1,0 +1,50 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: restaurant-service
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/restaurant_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+        max-page-size: 50
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 500ms
+      connect-timeout: 500ms
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+  geocoding:
+    base-url: https://maps.googleapis.com
+    api-key: ${GOOGLE_GEOCODING_API_KEY}
+    region: in
+    cache-ttl-days: 14d
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

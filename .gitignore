@@ -25,3 +25,49 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
+# ---------- Maven ----------
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ---------- IDE ----------
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+.apt_generated/
+.sts4-cache/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+*.swp
+
+# ---------- Logs ----------
+*.log
+logs/
+
+# ---------- Environment / Secrets ----------
+.env
+.env.*
+*.local
+application-local.properties
+application-local.yml
+application-secret.properties
+application-secret.yml
+
+# ---------- Kotlin (for your order-service later) ----------
+.kotlin/
+
+# ---------- Build output (Gradle, if you add it) ----------
+build/
+.gradle/
+
+# ---------- Docker (local overrides) ----------
+docker-compose.override.yml
