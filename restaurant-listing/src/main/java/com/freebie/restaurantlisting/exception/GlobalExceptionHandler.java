@@ -31,10 +31,15 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), req, null);
     }
 
-    @ExceptionHandler(MenuItemNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleMenuItemNotFound(MenuItemNotFoundException ex, HttpServletRequest req) {
+    @ExceptionHandler({MenuItemNotFoundException.class, RestaurantOrderNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleItemOrOrderNotFound(MenuItemNotFoundException ex, HttpServletRequest req) {
         log.info("MenuItem Not Found on {}: {}", req.getRequestURI(), ex.getMessage());
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), req, null);
+    }
+
+    @ExceptionHandler(InvalidOrderStateException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidState(InvalidOrderStateException ex, HttpServletRequest req) {
+        return build(HttpStatus.CONFLICT, ex.getMessage(), req, null);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

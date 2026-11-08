@@ -45,6 +45,7 @@ public class MenuController {
     }
 
     @DeleteMapping("/{itemId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMenuItem(@PathVariable("restaurantId") UUID restaurantId,
                                @PathVariable("itemId") UUID itemId,
                                @AuthenticationPrincipal Jwt jwt) {

@@ -29,9 +29,11 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/api/v1/restaurants/*/orders/**").hasRole("RESTAURANT")
                         .requestMatchers(HttpMethod.GET, "/api/v1/restaurants/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/restaurants").hasRole("RESTAURANT")
-                        .requestMatchers(HttpMethod.PUT, "/restaurants/**").hasRole("RESTAURANT")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/restaurants").hasRole("RESTAURANT")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/restaurants/**").hasRole("RESTAURANT")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/restaurants/**").hasRole("RESTAURANT")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth -> oauth
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
